@@ -1,0 +1,18 @@
+{
+  "rate_test": 0.686666,
+  "rate_ctrl": 0.648564,
+  "abs_lift": 0.038102,
+  "rel_lift": 0.058748,
+  "z_stat": 9.0761,
+  "p_value": 0.0,
+  "ci_diff_low": 0.029865,
+  "ci_diff_high": 0.046339,
+  "cohens_h": 0.0809,
+  "effect_label": "Small",
+  "statistically_significant": true,
+  "exceeds_business_threshold": true,
+  "n_test": 26968,
+  "n_ctrl": 23532,
+  "x_test": 18518,
+  "x_ctrl": 15262
+}

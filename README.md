@@ -12,9 +12,10 @@
 ---
 
 Author: 
-Ngoc Ha Nguyen - https://www.linkedin.com/in/hannah-ngocha-nguyen
+Ngoc Ha Nguyen - [Linkedin](https://www.linkedin.com/in/hannah-ngocha-nguyen/)
 
-Full analysis notebooks here - (link)
+
+Full analysis notebooks [here](https://github.com/ngocha2811/ux-ab-test-analysis/tree/main/notebooks)
 
 ![Dashboard Preview](output/dashboard_preview.png)
 

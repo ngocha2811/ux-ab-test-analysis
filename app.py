@@ -71,7 +71,9 @@ if data_loaded:
         df_filtered = df_filtered[df_filtered["gendr"] == selected_gender]
 
     st.sidebar.markdown("---")
-    st.sidebar.metric("Clients in view", f"{len(df_filtered):,}")
+assigned_filtered = df_filtered[df_filtered["Variation"].isin(["Test", "Control"])]
+assigned_filtered = df_filtered[df_filtered["Variation"].isin(["Test", "Control"])]
+st.sidebar.metric("Clients in view", f"{len(assigned_filtered):,}")
 
 # ─────────────────────────────────────────────
 # Header
@@ -117,7 +119,15 @@ def compute_stats(df_in):
         ci_test=ci_test, ci_ctrl=ci_ctrl, ci_diff=ci_diff
     )
 
-s = compute_stats(df_filtered)
+s = compute_stats(df_filtered)          # used for KPI cards and charts only
+s_full = dict(
+    rate_test=results["rate_test"],
+    rate_ctrl=results["rate_ctrl"],
+    abs_lift=results["abs_lift"],
+    rel_lift=results["rel_lift"],
+    p_value=results["p_value"],
+    ci_diff=(results["ci_diff_low"], results["ci_diff_high"]),
+)
 
 if s is None:
     st.warning("Not enough data in this segment for reliable statistics.")
@@ -164,36 +174,37 @@ st.markdown("---")
 # ─────────────────────────────────────────────
 # Business verdict
 # ─────────────────────────────────────────────
-sig = s["p_value"] < 0.05
-exceeds = s["rel_lift"] > BUSINESS_THRESHOLD
+sig = s_full["p_value"] < 0.05
+exceeds = s_full["rel_lift"] > BUSINESS_THRESHOLD
 
 if sig and exceeds:
     verdict_color = "#065F46"
     verdict_bg = "#D1FAE5"
     verdict_icon = "✅"
-    verdict_text = f"Lift of {s['rel_lift']:+.1%} is statistically significant (p={s['p_value']:.4f}) and exceeds the 5% business threshold. **Recommend rolling out the new UX.**"
+    verdict_text = f"Lift of {s_full['rel_lift']:+.1%} is statistically significant (p={s_full['p_value']:.4f}) and exceeds the 5% business threshold. **Recommend rolling out the new UX.**"
 elif sig and not exceeds:
     verdict_color = "#92400E"
     verdict_bg = "#FEF3C7"
     verdict_icon = "⚠️"
-    verdict_text = f"Lift is statistically significant (p={s['p_value']:.4f}) but the relative lift of {s['rel_lift']:+.1%} falls below the 5% threshold. Effect too small to justify rollout cost."
+    verdict_text = f"Lift is statistically significant (p={s_full['p_value']:.4f}) but the relative lift of {s_full['rel_lift']:+.1%} falls below the 5% threshold. Effect too small to justify rollout cost."
 elif not sig and exceeds:
     verdict_color = "#1E3A8A"
     verdict_bg = "#DBEAFE"
     verdict_icon = "🔍"
-    verdict_text = f"Relative lift of {s['rel_lift']:+.1%} looks promising but is not statistically significant (p={s['p_value']:.4f}). Consider extending the test period."
+    verdict_text = f"Relative lift of {s_full['rel_lift']:+.1%} looks promising but is not statistically significant (p={s_full['p_value']:.4f}). Consider extending the test period."
 else:
     verdict_color = "#7F1D1D"
     verdict_bg = "#FEE2E2"
     verdict_icon = "❌"
-    verdict_text = f"No significant lift detected. Relative lift = {s['rel_lift']:+.1%}, p = {s['p_value']:.4f}. Do not roll out."
+    verdict_text = f"No significant lift detected. Relative lift = {s_full['rel_lift']:+.1%}, p = {s_full['p_value']:.4f}. Do not roll out."
 
 st.markdown(
     f"""
     <div style="background:{verdict_bg}; border-left: 5px solid {verdict_color};
                 padding: 16px 20px; border-radius: 6px; margin-bottom: 16px;">
         <span style="font-size:1.4em;">{verdict_icon}</span>
-        <strong style="color:{verdict_color}; font-size:1.05em;"> Business Verdict</strong><br>
+        <strong style="color:{verdict_color}; font-size:1.05em;"> Business Verdict</strong>
+        <span style="color:#6B7280; font-size:0.85em;"> — based on full experiment population</span><br>
         <span style="color:#1f2937;">{verdict_text}</span>
     </div>
     """,
@@ -292,21 +303,21 @@ st.markdown("---")
 st.subheader("📐 Lift Confidence Interval")
 fig_ci = go.Figure()
 fig_ci.add_trace(go.Scatter(
-    x=[s["ci_diff"][0], s["ci_diff"][1]],
+    x=[s_full["ci_diff"][0], s_full["ci_diff"][1]],
     y=["Lift", "Lift"],
     mode="lines",
     line=dict(color="#2563EB", width=4),
     name="95% CI"
 ))
 fig_ci.add_trace(go.Scatter(
-    x=[s["abs_lift"]],
+    x=[s_full["abs_lift"]],
     y=["Lift"],
     mode="markers",
     marker=dict(size=14, color="#2563EB"),
-    name=f"Estimate: {s['abs_lift']:+.2%}"
+    name=f"Estimate: {s_full['abs_lift']:+.2%}"
 ))
 fig_ci.add_vline(x=0, line_dash="dash", line_color="gray", annotation_text="No effect")
-fig_ci.add_vline(x=BUSINESS_THRESHOLD * s["rate_ctrl"],
+fig_ci.add_vline(x=BUSINESS_THRESHOLD * s_full["rate_ctrl"],
                  line_dash="dot", line_color="orange",
                  annotation_text="Business threshold")
 fig_ci.update_layout(
@@ -345,4 +356,4 @@ artificially inflating the sample size and producing overstated statistical sign
 ***Reference:** Kohavi, Tang & Xu — *Trustworthy Online Controlled Experiments* (2020), Chapter 14: Choosing a Randomization Unit.
     """)
 
-st.caption("Built with Streamlit · Analysis by Ngoc Ha Nguyen | LinkedIn: https://www.linkedin.com/in/ngoc-ha-nguyen/ · Data: Vanguard A/B Experiment Dataset")
+st.caption("Built with Streamlit · Analysis by Ngoc Ha Nguyen · [LinkedIn](https://www.linkedin.com/in/ngoc-ha-nguyen/) · [GitHub](https://github.com/ngocha2811/ux-ab-test-analysis) · Data: Vanguard A/B Experiment Dataset")

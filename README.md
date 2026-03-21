@@ -1,13 +1,8 @@
 # 🧪 A/B Test Analysis — UX Completion Rate
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)
-![Jupyter](https://img.shields.io/badge/Jupyter-Notebooks-orange?logo=jupyter)
-![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red?logo=streamlit)
-![pandas](https://img.shields.io/badge/pandas-Data%20Analysis-150458?logo=pandas)
-![scipy](https://img.shields.io/badge/scipy-Statistics-8CAAE6?logo=scipy)
 
 ## Live Dashboard from Streamlit 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ux-ab-test-analysis.streamlit.app/)  - https://ux-ab-test-analysis.streamlit.app/
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ux-ab-test-analysis.streamlit.app/)
 
 ---
 
@@ -18,6 +13,7 @@ Ngoc Ha Nguyen - [Linkedin](https://www.linkedin.com/in/hannah-ngocha-nguyen/)
 Full analysis notebooks [here](https://github.com/ngocha2811/ux-ab-test-analysis/tree/main/notebooks)
 
 ![Dashboard Preview](output/dashboard_preview.png)
+[Streamlit Live Dashboard](https://ux-ab-test-analysis.streamlit.app/)
 
 ---
 

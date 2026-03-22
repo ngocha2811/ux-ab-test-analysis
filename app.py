@@ -239,8 +239,7 @@ with col_left:
  
     fig_bar.add_hline(
         y=s["rate_ctrl"],
-        line_dash="dot", line_color="gray",
-        annotation_text="Control baseline", annotation_position="bottom right"
+        line_dash="dot", line_color="gray"
     )
     fig_bar.update_layout(
         yaxis_tickformat=".0%",

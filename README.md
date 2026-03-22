@@ -1,18 +1,15 @@
 # 🧪 A/B Test Analysis — UX Completion Rate
+Python | Streamlit
 
-
-## Live Dashboard from Streamlit 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ux-ab-test-analysis.streamlit.app/)
+## Live Dashboard in Streamlit: [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ux-ab-test-analysis.streamlit.app/)
 
 ---
 
 Author: 
 Ngoc Ha Nguyen - [Linkedin](https://www.linkedin.com/in/hannah-ngocha-nguyen/)
 
-
-Full analysis notebooks [here](https://github.com/ngocha2811/ux-ab-test-analysis/tree/main/notebooks)
-
 ![Dashboard Preview](output/dashboard_preview.png)
+
 [Streamlit Live Dashboard](https://ux-ab-test-analysis.streamlit.app/)
 
 ---
@@ -54,6 +51,8 @@ Using `visitor_id` or `visit_id` as the analysis unit would treat correlated obs
 | Statistically significant? | Yes (α = 0.05) |
 | Exceeds 5% business threshold? | Yes |
 | **Decision** | **Recommend full rollout** |
+
+Full analysis notebooks [Here](https://github.com/ngocha2811/ux-ab-test-analysis/tree/main/notebooks)
 
 ---
 

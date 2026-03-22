@@ -236,11 +236,11 @@ with col_left:
             textposition="outside",
             textfont=dict(size=14, color="black")
         ))
-
+ 
     fig_bar.add_hline(
         y=s["rate_ctrl"],
         line_dash="dot", line_color="gray",
-        annotation_text="Control baseline", annotation_position="top left"
+        annotation_text="Control baseline", annotation_position="bottom right"
     )
     fig_bar.update_layout(
         yaxis_tickformat=".0%",

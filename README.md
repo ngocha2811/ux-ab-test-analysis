@@ -16,7 +16,7 @@ Ngoc Ha Nguyen - [Linkedin](https://www.linkedin.com/in/hannah-ngocha-nguyen/)
 
 **Problem:** A financial services company redesigned a multi-step digital onboarding flow and needed to determine whether the new UX improved completion rates enough to justify the rollout cost.
 
-**Data:** Three sources — client demographics (age, balance, tenure, gender), digital funnel behavior (event-level visits across a 5-step process), and experiment group assignment. The experiment ran for approximately **3 months** (exact date range derived from web event data).
+**Data:** Three sources — client demographics (age, balance, tenure, gender), digital funnel behavior (event-level visits across a 5-step process), and experiment group assignment. The experiment ran for 97 days.
 
 **Method:** A/B test analysis using a two-proportion z-test at the client level. Completion is defined as a client reaching the `confirm` step at least once during the test period.
 
